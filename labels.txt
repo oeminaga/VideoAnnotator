@@ -1,1 +1,16 @@
 ﻿tumor
+benign
+T1HG
+T1LG
+T2HG
+TaHG
+TaLG
+TaLH
+TiHG
+AdenocarcinomaEntericType
+clot
+benign_inflammation
+ModerateDysplasia
+NoBiopsy
+BiopsyProcedure
+Exclude

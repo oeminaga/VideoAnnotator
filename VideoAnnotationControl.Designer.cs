@@ -44,11 +44,12 @@
             this.tableLayoutPanel1.Controls.Add(this.axWindowsMediaPlayer1, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(714, 686);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 96F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1428, 1319);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // gantChart1
@@ -60,11 +61,11 @@
             this.gantChart1.duration = 0D;
             this.gantChart1.FPS = 0D;
             this.gantChart1.label = "";
-            this.gantChart1.Location = new System.Drawing.Point(2, 638);
-            this.gantChart1.Margin = new System.Windows.Forms.Padding(2);
+            this.gantChart1.Location = new System.Drawing.Point(4, 1227);
+            this.gantChart1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gantChart1.Name = "gantChart1";
             this.gantChart1.PlayerSign = new System.Drawing.Point(0, 0);
-            this.gantChart1.Size = new System.Drawing.Size(710, 50);
+            this.gantChart1.Size = new System.Drawing.Size(1420, 50);
             this.gantChart1.TabIndex = 0;
             this.gantChart1.Load += new System.EventHandler(this.gantChart1_Load);
             this.gantChart1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gantChart1_MouseDown);
@@ -75,21 +76,23 @@
             // 
             this.axWindowsMediaPlayer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.axWindowsMediaPlayer1.Enabled = true;
-            this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(3, 3);
+            this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(6, 6);
+            this.axWindowsMediaPlayer1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
             this.axWindowsMediaPlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer1.OcxState")));
-            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(708, 630);
+            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(1416, 1211);
             this.axWindowsMediaPlayer1.TabIndex = 1;
             this.axWindowsMediaPlayer1.PositionChange += new AxWMPLib._WMPOCXEvents_PositionChangeEventHandler(this.axWindowsMediaPlayer1_PositionChange);
             this.axWindowsMediaPlayer1.DoubleClickEvent += new AxWMPLib._WMPOCXEvents_DoubleClickEventHandler(this.axWindowsMediaPlayer1_DoubleClickEvent);
             // 
             // VideoAnnotationControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "VideoAnnotationControl";
-            this.Size = new System.Drawing.Size(714, 686);
+            this.Size = new System.Drawing.Size(1428, 1319);
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).EndInit();
             this.ResumeLayout(false);

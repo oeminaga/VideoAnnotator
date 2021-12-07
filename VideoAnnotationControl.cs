@@ -26,13 +26,15 @@ namespace VideoAnnotatot
         private void AxWindowsMediaPlayer1_PlayStateChange(object sender, AxWMPLib._WMPOCXEvents_PlayStateChangeEvent e)
         {
 
-
             if (e.newState == (int)WMPLib.WMPPlayState.wmppsReady & this.axWindowsMediaPlayer1.Ctlcontrols.currentItem != null)
             {
-                this.axWindowsMediaPlayer1.Ctlcontrols.play();
-                
-                this.gantChart1.Enabled = true;
-                this.gantChart1.Refresh();
+                Task.Run(() =>
+                {
+                    this.axWindowsMediaPlayer1.Ctlcontrols.play();
+
+                    this.gantChart1.Enabled = true;
+                    this.gantChart1.Refresh();
+                });
             }
             if (e.newState == (int)WMPLib.WMPPlayState.wmppsPlaying)
             {
@@ -52,12 +54,13 @@ namespace VideoAnnotatot
 
         }
         bool Show_Frame = false;
+        double _position = -1;
         private void gantChart1_MouseMove(object sender, MouseEventArgs e)
         {
             Debug.WriteLine(this.gantChart1.manager.move_which);
-            if (_filename != String.Empty && this.gantChart1.manager.move_which!="" && this.gantChart1.manager.hit_point.X!=-1)
+            if (_filename != String.Empty && this.gantChart1.manager.move_which != "" && this.gantChart1.manager.hit_point.X != -1)
             {
-                double _position = 0;
+                //double _position = 0;
                 if (this.gantChart1.manager.move_which == "start")
                 {
                     _position = this.gantChart1.manager.ganttChartItem.StartPoint.X;
@@ -70,15 +73,19 @@ namespace VideoAnnotatot
                 {
                     _position = e.Location.X;
                 }
+
                 
-                this.axWindowsMediaPlayer1.Ctlcontrols.currentPosition = Math.Round(((double)_position / ((double)this.gantChart1.Width)) * this.axWindowsMediaPlayer1.Ctlcontrols.currentItem.duration,1);
-                Show_Frame = true;
-                Debug.WriteLine(_position);
+                //Debug.WriteLine(_position);
             }
             else
             {
-                this.axWindowsMediaPlayer1.Ctlcontrols.pause();
+                //this.axWindowsMediaPlayer1.Ctlcontrols.pause();
             }
+            if (_position>-1)
+            Task.Run(() =>
+                      this.axWindowsMediaPlayer1.Ctlcontrols.currentPosition = Math.Round(((double)_position / ((double)this.gantChart1.Width)) * this.axWindowsMediaPlayer1.Ctlcontrols.currentItem.duration, 1));
+            //this.gantChart1.Invalidate();
+            Show_Frame = true;
         }
 
         private string _filename = String.Empty;
@@ -114,9 +121,12 @@ namespace VideoAnnotatot
         {
             if (Show_Frame && e.Button == MouseButtons.Left)
             {
-                this.axWindowsMediaPlayer1.Ctlcontrols.play();
+                Task.Run(() =>
+                {
+                    this.axWindowsMediaPlayer1.Ctlcontrols.play();
 
-                this.axWindowsMediaPlayer1.Ctlcontrols.pause();
+                    this.axWindowsMediaPlayer1.Ctlcontrols.pause();
+                });
             }
         }
 
@@ -134,11 +144,14 @@ namespace VideoAnnotatot
         {
             if (this.axWindowsMediaPlayer1.playState == WMPLib.WMPPlayState.wmppsPlaying)
             {
-                this.gantChart1.PlayerSign = new Point((int)Math.Round((this.axWindowsMediaPlayer1.Ctlcontrols.currentPosition / this.axWindowsMediaPlayer1.Ctlcontrols.currentItem.duration) * this.gantChart1.Width, 0), 0);
-                this.gantChart1.duration = this.axWindowsMediaPlayer1.Ctlcontrols.currentItem.duration;
-                this.gantChart1.FPS = this.axWindowsMediaPlayer1.network.encodedFrameRate;
-                Debug.WriteLine(this.gantChart1.PlayerSign);
-                this.gantChart1.Refresh();
+                //Task.Run(() =>
+                //{
+                    this.gantChart1.PlayerSign = new Point((int)Math.Round((this.axWindowsMediaPlayer1.Ctlcontrols.currentPosition / this.axWindowsMediaPlayer1.Ctlcontrols.currentItem.duration) * this.gantChart1.Width, 0), 0);
+                    this.gantChart1.duration = this.axWindowsMediaPlayer1.Ctlcontrols.currentItem.duration;
+                    this.gantChart1.FPS = this.axWindowsMediaPlayer1.network.encodedFrameRate;
+                    Debug.WriteLine(this.gantChart1.PlayerSign);
+                    this.gantChart1.Refresh();
+                //});
             }
 
             else if (this.axWindowsMediaPlayer1.playState == WMPLib.WMPPlayState.wmppsStopped)
@@ -154,9 +167,8 @@ namespace VideoAnnotatot
         {
             if (this.axWindowsMediaPlayer1.playState == WMPLib.WMPPlayState.wmppsPaused)
             {
-                this.gantChart1.PlayerSign = new Point((int)Math.Round((e.oldPosition / this.axWindowsMediaPlayer1.Ctlcontrols.currentItem.duration) * this.gantChart1.Width, 0), 0);
-
-                this.gantChart1.Refresh();
+                    this.gantChart1.PlayerSign = new Point((int)Math.Round((e.oldPosition / this.axWindowsMediaPlayer1.Ctlcontrols.currentItem.duration) * this.gantChart1.Width, 0), 0);
+                    this.gantChart1.Refresh();
             }
         }
 

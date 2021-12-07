@@ -56,18 +56,17 @@ namespace VideoAnnotatot
         public Dictionary<string, Brush> _Color_Label = new Dictionary<string, Brush>();
         private void GantChart_Paint(object sender, PaintEventArgs e)
         {
-            foreach (GanttChartItem item in this.manager._collection)
-            {
-                e.Graphics.FillRectangle(Brushes.Gray, item.Block);
-                
-                e.Graphics.FillRectangle(Brushes.Red, item.StartPoint);
-                e.Graphics.DrawRectangle(Pens.Gray, item.StartPoint);
-                e.Graphics.FillRectangle(Brushes.Red, item.EndPoint);
-                e.Graphics.DrawRectangle(Pens.Gray, item.EndPoint);
-                
-            }
-            e.Graphics.FillRectangle(Brushes.Green, new Rectangle(PlayerSign, new Size(5, 50)));
+                foreach (GanttChartItem item in this.manager._collection)
+                {
+                    e.Graphics.FillRectangle(Brushes.Gray, item.Block);
 
+                    e.Graphics.FillRectangle(Brushes.Red, item.StartPoint);
+                    e.Graphics.DrawRectangle(Pens.Gray, item.StartPoint);
+                    e.Graphics.FillRectangle(Brushes.Red, item.EndPoint);
+                    e.Graphics.DrawRectangle(Pens.Gray, item.EndPoint);
+
+                }
+                e.Graphics.FillRectangle(Brushes.Green, new Rectangle(PlayerSign, new Size(5, 50)));
         }
 
         private void GantChart_MouseDown(object sender, MouseEventArgs e)
